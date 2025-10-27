@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+@font-face {
+  font-family: 'Dreiviertelfett';
+  src: url('/fonts/SoehneBreit-Dreiviertelfett.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ExtrafettKursiv';
+  src: url('/fonts/SoehneBreit-ExtrafettKursiv.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kraeftig';
+  src: url('/fonts/Soehne-Kraeftig.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Extrafett';
+  src: url('/fonts/Soehne-Extrafett.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Buch';
+  src: url('/fonts/SoehneBreit-Buch.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Halbfett';
+  src: url('/fonts/SoehneBreit-Halbfett.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'FettKursiv';
+  src: url('/fonts/SoehneBreit-FettKursiv.otf') format('opentype');
+  font-display: swap;
+}
+
+/* Banner  Section */
+.funnel-banner video {
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.funnel-banner .funnel-banner-title {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #52ffa1, #0a7cff, #8247e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Responsive Text Sizes */
+@media (min-width: 768px) {
+  .funnel-banner .funnel-banner-title {
+    font-size: 5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .funnel-banner .funnel-banner-title {
+    font-size: 6rem;
+  }
+}
