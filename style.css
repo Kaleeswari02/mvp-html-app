@@ -48,29 +48,46 @@ body {
   font-display: swap;
 }
 
-/* Banner  Section */
-.funnel-banner video {
-  object-fit: cover;
-  filter: brightness(0.6);
+/* =============================
+   HERO BANNER (Bootstrap + CSS)
+   Replicates Tailwind UI exactly
+============================= */
+
+.banner-video {
+  object-fit: contain; /* change to 'cover' for full bleed */
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: brightness(0.78);
+  z-index: 0;
 }
 
-.funnel-banner .funnel-banner-title {
-  font-size: 2.5rem;
-  background: linear-gradient(90deg, #52ffa1, #0a7cff, #8247e5);
+.banner-content {
+  z-index: 2;
+  filter: drop-shadow(0 0 25px rgba(0,0,0,0.9));
+  margin-top: 1rem;
+}
+
+/* Subtitle */
+.banner-subtitle {
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+  font-size: 11px; /* base small like Tailwind xs */
+  margin-bottom: 0.5rem;
+}
+
+/* Gradient Title */
+.banner-title {
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.88;
+  background: linear-gradient(to right, #52FFA1, #0A7CFF, #8247E5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 6px 6px rgba(0,0,0,0.6);
+  margin: 0;
 }
 
-/* Responsive Text Sizes */
-@media (min-width: 768px) {
-  .funnel-banner .funnel-banner-title {
-    font-size: 5rem;
-  }
-}
-
-@media (min-width: 1200px) {
-  .funnel-banner .funnel-banner-title {
-    font-size: 6rem;
-  }
-}
