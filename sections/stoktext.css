@@ -1,0 +1,311 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+
+@font-face {
+  font-family: 'Dreiviertelfett';
+  src: url('/assets/fonts/SoehneBreit-Dreiviertelfett.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ExtrafettKursiv';
+  src: url('/assets/fonts/SoehneBreit-ExtrafettKursiv.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kraeftig';
+  src: url('/assets/fonts/Soehne-Kraeftig.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Extrafett';
+  src: url('/assets/fonts/Soehne-Extrafett.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Buch';
+  src: url('/assets/fonts/SoehneBreit-Buch.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Halbfett';
+  src: url('/assets/fonts/SoehneBreit-Halbfett.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'FettKursiv';
+  src: url('/assets/fonts/SoehneBreit-FettKursiv.otf') format('opentype');
+  font-display: swap;
+}
+
+
+/* ===== Stok Text Section ===== */
+.funnel-stoktext-section {
+  position: relative;
+  width: 100%;
+  height: 100vh; 
+  background-image: url("/assets/images/stok-text-bg.png");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* ===== Ticker ===== */
+.funnel-ticker-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 400px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 1rem;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.funnel-ticker-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
+  margin-top: 1rem;
+}
+
+.funnel-ticker-content h1 {
+  font-size: 140px;
+  font-weight: 900;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.1);
+  line-height: 140px;
+  margin: 0;
+  user-select: none;
+  font-family: 'Extrafettkursiv', sans-serif;
+}
+
+
+
+/* ===== Fade ===== */
+.funnel-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, black, rgba(0, 0, 0, 0.7), transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===== Foreground Content ===== */
+.funnel-stok-content {
+  position: relative;
+  z-index: 5;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.funnel-stok-heading-part{
+    position: relative;
+    bottom: 20%;
+    display: flex;
+    justify-content: end;
+}
+.funnel-stok-heading {
+  font-size: 40px;
+  font-weight: 700;
+  text-align: left;
+    font-family: 'Halbfett', sans-serif;
+
+}
+
+.funnel-stok-para-part{
+    display: flex;
+    justify-content: start;
+    position: relative;
+    top: 3%;
+}
+
+.funnel-stok-para {
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: right;
+    font-family: 'Buch', sans-serif;
+
+}
+.funnel-stok-coin {
+  width: 600px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+  position: relative;
+  padding-left: 40px;
+  z-index: 2; /* coin above background, below overlay */
+}
+/* ===== Mobile text ===== */
+.funnel-stok-mobile-para {
+  display: none;
+}
+
+/* ===== Bottom overlay ===== */
+.funnel-bottom-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1920px;
+  height: auto;
+  object-fit: cover;
+  z-index: 3; /* overlay ABOVE the coin */
+  pointer-events: none;
+}
+/* ===== Responsive layout: stack text & coin vertically ===== */
+@media only screen and (max-width: 1024px) {
+  .funnel-stok-content {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  .funnel-stok-heading-part {
+    justify-content: center;
+    bottom: 0;
+    margin-bottom: 1rem;
+  }
+
+  .funnel-stok-heading {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .funnel-stok-coin {
+    width: 280px;
+    margin: 1.5rem 0;
+    padding-left: 0;
+    z-index: 2;
+    top: 40px;
+  }
+
+  .funnel-stok-para-part {
+    justify-content: center;
+    top: auto;
+    bottom: 5%;
+    position: absolute;
+    width: 90%;
+    z-index: 4;
+  }
+
+  .funnel-stok-para {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  }
+
+  .funnel-bottom-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1920px;
+    height: auto;
+    z-index: 3;
+  }
+}
+
+/* ===== Tablet view (same layout as desktop, just scaled) ===== */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .funnel-stok-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: 0 2rem;
+  }
+
+  .funnel-stok-heading-part {
+    bottom: 10%;
+    justify-content: flex-end;
+  }
+
+  .funnel-stok-heading {
+    font-size: 34px;
+    line-height: 1.3;
+  }
+
+  .funnel-stok-coin {
+    width: 400px;
+    padding-left: 20px;
+    top: 0;
+  }
+
+  .funnel-stok-para-part {
+    justify-content: flex-start;
+    top: 0;
+    position: relative;
+  }
+
+  .funnel-stok-para {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  .funnel-bottom-overlay {
+    width: 100%;
+    max-width: 1920px;
+    bottom: 0;
+  }
+
+  .funnel-ticker-content h1 {
+    font-size: 100px;
+    line-height: 120px;
+  }
+}
+
+/* ===== Smaller devices ===== */
+@media only screen and (max-width: 600px) {
+  .funnel-stok-heading {
+    position: relative;
+    font-size: 38px;
+    top: 50px;
+  }
+
+  .funnel-stok-para {
+    font-size: 16px;
+  }
+
+  .funnel-stok-coin {
+    width: 400px;
+    left: 20px;
+
+  }
+
+.funnel-ticker-content h1 {
+    font-size: 80px;
+    line-height: 100px;
+}
+  
+}

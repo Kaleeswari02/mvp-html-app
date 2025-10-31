@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email Verification</title>
+
+  <style>
+    body{
+      margin: 0;
+    }
+    /* ==== GLOBAL ==== */
+    .funnel-verify-page {
+      margin: 0 !important;
+      padding: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background: #000;
+      background-image: url('../assets/images/verify-bg.png');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ==== COMMON CARD ==== */
+    .verify-card {
+      position: relative;
+      width: 800px;
+      background-image: url('../assets/images/verify-card-bgimg.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      padding: 80px 80px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 24px;
+      backdrop-filter: blur(10px);
+      text-align: left;
+    }
+
+    .center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* ==== STATUS LABEL ==== */
+    .status-label {
+      display: flex;
+      align-items: center;
+      font-size: 36px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .status-label img {
+      width: auto;
+      margin-right: 10px;
+    }
+
+    /* ==== TITLE / MESSAGE ==== */
+    .status-message {
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin: 0;
+      max-width: 500px;
+    }
+
+    /* ==== SPINNER ==== */
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top: 4px solid #14f195;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ==== GRADIENT BUTTON ==== */
+    .gradient-link {
+      text-decoration: none;
+    }
+
+    .gradient-border {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: #120020;
+      padding: 12px 40px;
+      cursor: pointer;
+      border: none;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      overflow: hidden;
+      z-index: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .gradient-border::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 14px;
+      background: linear-gradient(90deg, #52ffa1, #0a7cff, #8247e5, #52ffa1);
+      background-size: 300% 100%;
+      animation: borderMove 2.5s linear infinite;
+      z-index: -1;
+      filter: blur(2px);
+    }
+
+    .gradient-border::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 10px;
+      background: #000;
+      z-index: 0;
+    }
+
+    .gradient-border span {
+      position: relative;
+      z-index: 2;
+    }
+
+    .gradient-border:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes borderMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 300% 50%;
+      }
+    }
+
+    /* ==== RESPONSIVE ==== */
+    @media (max-width: 768px) {
+      .verify-card {
+        width: 90%;
+        padding: 50px 30px;
+        align-items: center;
+        text-align: center;
+      }
+
+      .status-message {
+        font-size: 28px;
+        max-width: 100%;
+      }
+
+      .status-label {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="funnel-verify-page">
+  <!-- Loading -->
+  <div id="loading" class="verify-card center">
+    <div class="spinner"></div>
+    <h1 class="status-message">Verifying your email...</h1>
+  </div>
+
+  <!-- Success -->
+  <div id="success" class="verify-card" style="display: none;">
+    <div class="status-label">
+      <img src="../assets/images/success-icon.png" alt="Success Icon" />
+      <span>Success</span>
+    </div>
+    <h1 class="status-message">You’re In! The Future of Fitness Starts Now.</h1>
+    <a href="/" class="gradient-link">
+      <button class="gradient-border"><span>Get Start</span></button>
+    </a>
+  </div>
+
+  <!-- Error -->
+  <div id="error" class="verify-card" style="display: none;">
+    <div class="status-label">
+      <img src="../assets/images/error-icon.png" alt="Error Icon" />
+      <span style="color:#ff4d4d;">Verification Failed</span>
+    </div>
+    <h1 class="status-message">This link may be invalid or expired.</h1>
+  </div>
+</div>
+  <script>
+    (async function () {
+      const API_VERIFY = "https://api-dev.sportstech.app/auth-svc/api/web3/newsletter-verify";
+      const params = new URLSearchParams(window.location.search);
+      const email = params.get("email");
+      const hashedValue = params.get("hashedValue");
+
+      const loadingBox = document.getElementById("loading");
+      const successBox = document.getElementById("success");
+      const errorBox = document.getElementById("error");
+
+      // Hide loading if params are missing
+      if (!email || !hashedValue) {
+        loadingBox.style.display = "none";
+        errorBox.style.display = "flex";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_VERIFY}?email=${encodeURIComponent(email)}&hashedValue=${encodeURIComponent(hashedValue)}`);
+
+        loadingBox.style.display = "none";
+
+        if (!res.ok) throw new Error("Request failed");
+
+        const data = await res.json();
+        if (data.success || data.status === "success") {
+          successBox.style.display = "flex";
+        } else {
+          errorBox.style.display = "flex";
+        }
+      } catch {
+        loadingBox.style.display = "none";
+        errorBox.style.display = "flex";
+      }
+    })();
+  </script>
+</body>
+</html>

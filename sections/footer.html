@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Footer Section</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./footerstyle.css" />
+  </head>
+
+  <body class="bg-black text-white m-0">
+    <!-- ===== FOOTER SECTION ===== -->
+    <section id="funnelfooter-section" class="funnel-footer-section text-white">
+      <!-- Background Particles -->
+      <img src="/assets/images/footer-left-particle.png" alt="" aria-hidden="true"
+        class="footer-particle particle-left" />
+      <img src="/assets/images/footer-right-particle.png" alt="" aria-hidden="true"
+        class="footer-particle particle-right" />
+
+      <div class="container-fluid position-relative">
+        <div class="row justify-content-center align-items-center funnel-footer-section-container">
+          <!-- <div class="col-md-2 d-none d-md-block"></div> -->
+
+          <!-- ===== CENTER FORM SECTION ===== -->
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="funnel-footer-form-container position-relative text-center">
+            <img 
+                src="/assets/images/form-bg-small.png" 
+                alt="Form Background Desktop" 
+                class="funnel-footer-form-bg img-fluid d-none d-md-block" 
+              />
+
+              <!-- Background Image for Mobile -->
+              <img 
+                src="/assets/images/form-bg-mobile.png" 
+                alt="Form Background Mobile" 
+                class="funnel-footer-form-bg img-fluid d-block d-md-none" 
+              />
+              <div class="funnel-footer-logo-wrapper">
+                <img src="/assets/images/footer-logo-gif.gif" alt="Footer Logo"
+                  class="funnel-footer-logo-gif img-fluid" />
+              </div>
+
+              <div class="funnel-footer-text-section">
+                <h2 class="text-dark mb-4">
+                  Be an Origin Member of the World’s<br />
+                  First Crypto-Fitness Ecosystem
+                </h2>
+                  <div class="funnel-footer-text2">
+                <h1 class="text-white">
+                  Your Email =<br />
+                  Your Entry Ticket.
+                </h1>
+                <p class="text-white mb-3">Enter your email to join the whitelist:</p>
+
+                <!-- === FORM === -->
+                <form id="subscribeForm" novalidate>
+                  <label for="emailInput" class="visually-hidden">Email Address</label>
+                  <div class="funnel-input-wrapper mb-2" id="inputWrapper">
+                    <img src="/assets/images/email-gif.gif" alt="Email Icon" width="32"
+                      class="funnel-input-icon" />
+                    <input
+                      type="email"
+                      id="emailInput"
+                      placeholder="Enter your mail ID"
+                      required
+                      class="funnel-input-field"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div id="emailError" class="error-message" role="alert"></div>
+                  <div id="formMessage" class="success-message" aria-live="polite"></div>
+
+                  <button type="submit" id="submitBtn" class="funnel-gradient-btn mt-3" aria-busy="false">
+                    <img src="/assets/images/send-icon.png" alt="Send Icon" width="16" class="me-2" />
+                    <span class="btn-text">Submit</span>
+                  </button>
+
+                </form>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col-md-2 d-none d-md-block"></div> -->
+        </div>
+
+        <!-- ===== FOOTER BOTTOM ===== -->
+   <div class="container-fluid mb-5 funnel-sociallinks">
+  <div class="container">
+    <div class="row align-items-center text-center text-md-center">
+      
+      <!-- Logo -->
+      <div class="col-12 col-md-3 d-flex justify-content-center justify-content-md-center mb-3 mb-md-0">
+        <img src="/assets/images/footer-logo.png" alt="Sportstech Logo" class="footer-logo" width="150" />
+      </div>
+
+      <!-- Links -->
+      <div class="col-12 col-md-4 mb-3 mb-md-0">
+        <div class="d-flex flex-column flex-md-row justify-content-end align-items-center gap-3 gap-md-5 funnel-footer-links">
+          <a href="#" class="text-white text-decoration-none">About Us</a>
+          <a href="#" class="text-white text-decoration-none">Whitepaper</a>
+        </div>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="col-12 col-md-5">
+        <div class="d-flex flex-wrap justify-content-center justify-content-md-end align-items-center gap-3">
+          <img src="/assets/images/Telegram.png" alt="Join us on Telegram" class="footer-social-icon" width="35" />
+          <img src="/assets/images/Twitter.png" alt="Follow us on Twitter" class="footer-social-icon" width="35" />
+          <img src="/assets/images/Youtube.png" alt="Watch on YouTube" class="footer-social-icon" width="35" />
+          <img src="/assets/images/Instagram.png" alt="Follow us on Instagram" class="footer-social-icon" width="35" />
+          <img src="/assets/images/Discord.png" alt="Join us on Discord" class="footer-social-icon" width="35" />
+          <img src="/assets/images/Facebook.png" alt="Follow us on Facebook" class="footer-social-icon" width="35" />
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+      </div>
+    </section>
+
+    <!-- ===== JS SECTION ===== -->
+   <script>
+(function () {
+  'use strict';
+
+  // ===== CONFIG =====
+  const API_SUBSCRIBE = 'https://api-dev.sportstech.app/auth-svc/api/web3/newsletter-subscribe';
+  const MESSAGES = {
+    required: 'Email is required',
+    invalid: 'Please enter a valid email address',
+    success: 'Success! Check your inbox to verify your email address.',
+    error: 'Something went wrong. Please try again',
+    sending: 'Loading...'
+  };
+  const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+  // ===== DOM ELEMENTS =====
+  const form = document.getElementById('subscribeForm');
+  const input = document.getElementById('emailInput');
+  const btn = document.getElementById('submitBtn');
+  const errorMsg = document.getElementById('emailError');
+  const successMsg = document.getElementById('formMessage');
+
+  // ===== HELPERS =====
+  const setLoading = (isLoading) => {
+    btn.disabled = isLoading;
+    btn.innerHTML = isLoading
+      ? `<div class="btn-loader"></div><span>${MESSAGES.sending}</span>`
+      : `<img src="/assets/images/send-icon.png" alt="Send" width="16" class="me-2" /><span>Send</span>`;
+  };
+
+  const validateEmail = (email) => {
+    if (!email) return MESSAGES.required;
+    if (!EMAIL_REGEX.test(email)) return MESSAGES.invalid;
+    return null;
+  };
+
+  // ===== SUBMIT HANDLER =====
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = input.value.trim();
+    errorMsg.textContent = '';
+    successMsg.textContent = '';
+
+    const validationError = validateEmail(email);
+    if (validationError) {
+      errorMsg.textContent = validationError;
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const res = await fetch(`${API_SUBSCRIBE}?email=${encodeURIComponent(email)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (!res.ok) throw new Error('Failed to subscribe');
+      const data = await res.json();
+
+      // Expect backend to send verification email
+      successMsg.textContent = MESSAGES.success;
+      input.value = '';
+
+    } catch (err) {
+      errorMsg.textContent = MESSAGES.error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ===== INIT =====
+  form.addEventListener('submit', handleSubmit);
+})();
+</script>
+
+  </body>
+</html>
